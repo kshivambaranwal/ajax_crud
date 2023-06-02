@@ -129,6 +129,11 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        $imagePath = Employee::find($request->id)->file;
+        if (File::exists($imagePath)) {
+            // Delete the file from the filesystem
+            File::delete($imagePath);
+        }
         Employee::find($request->id)->delete();
         return response()->json([
             'status' => 200,

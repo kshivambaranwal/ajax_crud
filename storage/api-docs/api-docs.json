@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Users Api",
+        "description": "API documentation for Users Api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/index": {
+            "get": {
+                "tags": [
+                    "Company and Education"
+                ],
+                "summary": "Get all List of Company and Education",
+                "description": "Returns a list of all Company and Education",
+                "operationId": "22355deb333e6380c47804788c278466",
+                "responses": {
+                    "200": {
+                        "description": "list of company and Education"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    }
+}
