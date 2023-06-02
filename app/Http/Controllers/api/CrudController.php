@@ -40,6 +40,34 @@ class CrudController extends Controller
         ]);
     }
 
+    /**
+ * @OA\Post(
+ *     path="/api/user-store",
+ *     tags={"Users"},
+ *     summary="Create a new user",
+ *     @OA\RequestBody(
+ *         description="User data",
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(
+ *                 required={"name", "email", "phone", "company", "education", "hobby", "gender", "experience", "message", "file"},
+ *                 @OA\Property(property="name", type="string"),
+ *                 @OA\Property(property="email", type="string", format="email"),
+ *                 @OA\Property(property="phone", type="integer"),
+ *                 @OA\Property(property="company", type="integer"),
+ *                 @OA\Property(property="education", type="integer"),
+ *                 @OA\Property(property="hobby[]", type="array", @OA\Items(type="string")),
+ *                 @OA\Property(property="gender", type="string"),
+ *                 @OA\Property(property="experience[]", type="array", @OA\Items(type="string")),
+ *                 @OA\Property(property="message", type="string"),
+ *                 @OA\Property(property="file", type="string", format="binary"),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="User created successfully"),
+ *     @OA\Response(response="422", description="Validation error"),
+ * )
+ */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -56,7 +84,7 @@ class CrudController extends Controller
         ]);
         if ($validation->fails()) {
             return response()->json([
-                'status'=>301,
+                'status' => 422,
                 'validation' => $validation->errors()->all()
             ]);
         } else {
@@ -94,6 +122,34 @@ class CrudController extends Controller
         }
     }
 
+ /**
+ * @OA\Post(
+ *     path="/api/user-update",
+ *     tags={"Users"},
+ *     summary="Update a user",
+ *     @OA\RequestBody(
+ *         description="User data",
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(
+ *                 required={"name", "email", "phone", "company", "education", "hobby", "gender", "experience", "message"},
+ *                 @OA\Property(property="name", type="string"),
+ *                 @OA\Property(property="email", type="string", format="email"),
+ *                 @OA\Property(property="phone", type="integer"),
+ *                 @OA\Property(property="company", type="integer"),
+ *                 @OA\Property(property="education", type="integer"),
+ *                 @OA\Property(property="hobby[]", type="array", @OA\Items(type="string")),
+ *                 @OA\Property(property="gender", type="string"),
+ *                 @OA\Property(property="experience[]", type="array", @OA\Items(type="string")),
+ *                 @OA\Property(property="message", type="string"),
+ *                 @OA\Property(property="file", type="string", format="binary"),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="User created successfully"),
+ *     @OA\Response(response="422", description="Validation error"),
+ * )
+ */
     public function update(Request $request)
     {
 
@@ -143,7 +199,7 @@ class CrudController extends Controller
                 if ($createUser) {
                     return response()->json([
                         'status' => 200,
-                        'message' => 'User craeted Successfully!',
+                        'message' => 'User Update Successfully!',
                         'data' => $createUser,
                     ]);
                 }
@@ -154,6 +210,16 @@ class CrudController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/fetch-all",
+     *     tags={"User all Record"},
+     *     summary="Get all List of users table",
+     *     description="Returns a list of all users table",
+     *     @OA\Response(response="200", description="List of Users in data key"),
+     *     @OA\Response(response="401", description="Unauthorized"),
+     * )
+     */
     public function fetchall()
     {
         $data = Employee::all();
@@ -164,6 +230,26 @@ class CrudController extends Controller
         ]);
     }
 
+/**
+ * @OA\Post(
+ *     path="/api/user-delete",
+ *     tags={"Delete Users"},
+ *     summary="Delet a user",
+ *      @OA\RequestBody(
+ *         description="User ID",
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="multipart/form-data",
+ *             @OA\Schema(
+ *                 required={"user_id"},
+ *                 @OA\Property(property="user_id", type="integer")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="User deleted successfully"),
+ *     @OA\Response(response="422", description="Validation error"),
+ * )
+ */
     public function delete(Request $request)
     {
         try {

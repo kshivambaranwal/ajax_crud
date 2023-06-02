@@ -23,6 +23,217 @@
                     }
                 }
             }
+        },
+        "/api/user-store": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "operationId": "74d79ec61f86ef2e07c3c8bf5e3aeca3",
+                "requestBody": {
+                    "description": "User data",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "company",
+                                    "education",
+                                    "hobby",
+                                    "gender",
+                                    "experience",
+                                    "message",
+                                    "file"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "phone": {
+                                        "type": "integer"
+                                    },
+                                    "company": {
+                                        "type": "integer"
+                                    },
+                                    "education": {
+                                        "type": "integer"
+                                    },
+                                    "hobby[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "experience[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/user-update": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update a user",
+                "operationId": "8f126bc745fab02410048574a7ea93e8",
+                "requestBody": {
+                    "description": "User data",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "company",
+                                    "education",
+                                    "hobby",
+                                    "gender",
+                                    "experience",
+                                    "message"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "phone": {
+                                        "type": "integer"
+                                    },
+                                    "company": {
+                                        "type": "integer"
+                                    },
+                                    "education": {
+                                        "type": "integer"
+                                    },
+                                    "hobby[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "experience[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/fetch-all": {
+            "get": {
+                "tags": [
+                    "User all Record"
+                ],
+                "summary": "Get all List of users table",
+                "description": "Returns a list of all users table",
+                "operationId": "168cdf97f8967ff8ca1cf1cde1348fcf",
+                "responses": {
+                    "200": {
+                        "description": "List of Users in data key"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/user-delete": {
+            "post": {
+                "tags": [
+                    "Delete Users"
+                ],
+                "summary": "Delet a user",
+                "operationId": "fe4dd42c770d70103d70afb1a5bb35ea",
+                "requestBody": {
+                    "description": "User ID",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
         }
     }
 }

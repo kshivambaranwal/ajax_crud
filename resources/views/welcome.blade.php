@@ -48,7 +48,8 @@
             </div>
         </div>
 
-        <div class="bg-danger p-3"><button type="button" class="btn btn-info" data-bs-toggle="modal"
+        <div class="bg-danger p-3">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal"
                 data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"><i class="bi-plus-circle me-2"></i>
                 User</button></div>
         <div class="card-body table-responsive" id="show_all_employees">
@@ -210,7 +211,7 @@
                     $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
                 });
             }
-            
+
             // this is for fetching user data
             function fetchAllEmployees() {
                 var fetch = "{{ route('fetchAll') }}";
